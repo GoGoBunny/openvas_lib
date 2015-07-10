@@ -788,6 +788,12 @@ class VulnscanManager(object):
         return self.__manager.get_tasks_ids_by_status("Done")
 
     #----------------------------------------------------------------------
+    @property
+    def get_nvts(self):
+
+        return self.__manager.get_nvts()
+
+    #----------------------------------------------------------------------
     @set_interval(10.0)
     def _callback(self, func_end, func_status):
         """

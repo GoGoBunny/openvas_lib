@@ -169,6 +169,38 @@ class OMPv4(OMP):
         return self._manager.make_xml_request(request, xml_result=True).get("id")
 
     #----------------------------------------------------------------------
+    def pause_task(self, task_id):
+        """
+        Pauses a task in OpenVAS server.
+
+        :param task_id: task id
+        :type task_id: str
+
+        :raises: ClientError, ServerError
+        """
+        if not isinstance(task_id, basestring):
+            raise TypeError("Expected string, got %r instead" % type(task_id))
+
+        m_query = '<pause_task task_id="%s"/>' % task_id
+
+        self._manager.make_xml_request(m_query, xml_result=True)
+
+    def resume_task(self, task_id):
+        """
+        Remuses a task in OpenVAS server.
+
+        :param task_id: task id
+        :type task_id: str
+
+        :raises: ClientError, ServerError
+        """
+        if not isinstance(task_id, basestring):
+            raise TypeError("Expected string, got %r instead" % type(task_id))
+
+
+        m_query = '<resume_paused_task task_id="%s"/>' % task_id
+
+    #----------------------------------------------------------------------
     def delete_target(self, target_id):
         """
         Delete a target in OpenVAS server.
@@ -467,5 +499,18 @@ class OMPv4(OMP):
             raise TypeError("Expected string, got %r instead" % type(task_id))
 
         m_query = '<start_task task_id="%s"/>' % task_id
+
+        self._manager.make_xml_request(m_query, xml_result=True)
+
+    def get_nvts(self):
+        """
+        Get all NVTs.
+
+        :return: xml object
+        :rtype: `ElementTree
+
+        :raises: ClientError, ServerError
+        """
+        m_query = '<get_nvts details="1"/>'
 
         self._manager.make_xml_request(m_query, xml_result=True)

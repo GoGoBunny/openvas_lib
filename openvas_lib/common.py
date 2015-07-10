@@ -75,6 +75,12 @@ def get_connector(host, username, password, port=9390, timeout=None):
     if manager.protocol_version == "4.0":
         from openvas_lib.ompv4 import OMPv4
         return OMPv4(manager)
+    elif manager.protocol_version == "5.0":
+         from openvas_lib.ompv5 import OMPv5
+         return OMPv5(manager)
+    elif manager.protocol_version == "6.0":
+         from openvas_lib.ompv5 import OMPv6
+         return OMPv5(manager)
     else:
         raise RemoteVersionError("Unknown OpenVAS version for remote host.")
 
@@ -532,6 +538,30 @@ class OMP(object):
         raise NotImplementedError()
 
     #----------------------------------------------------------------------
+    def pause_task(self,task_id):
+        """
+        Pauses a task in OpenVAS server.
+
+        :param task_id: task id
+        :type task_id: str
+
+        :raises: ClientError, ServerError
+        """
+        raise NotImplementedError()
+
+    #----------------------------------------------------------------------
+    def resume_task(self,task_id):
+        """
+        Remuses a task in OpenVAS server.
+
+        :param task_id: task id
+        :type task_id: str
+
+        :raises: ClientError, ServerError
+        """
+        raise NotImplementedError()
+
+    #----------------------------------------------------------------------
     def create_target(self, name, hosts, comment=""):
         """
         Creates a target in OpenVAS.
@@ -713,6 +743,17 @@ class OMP(object):
 
         :param task_id: ID of task to start.
         :type task_id: str
+
+        :raises: ClientError, ServerError
+        """
+        raise NotImplementedError()
+
+    def get_nvts(self):
+        """
+        Get all NVTs.
+
+        :return: xml object
+        :rtype: `ElementTree
 
         :raises: ClientError, ServerError
         """

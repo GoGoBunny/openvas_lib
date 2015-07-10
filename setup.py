@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __license__ = """
-OpenVAS Manager OMPv4 and XML parser.
+OpenVAS Manager OMPv4/v5 and XML parser.
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ import os
 from distutils.core import setup
 
 # Text describing the module.
-description = 'OpenVAS Manager OMPv4 and XML report parser'
+description = 'OpenVAS Manager OMPv4/v5 and XML report parser'
 try:
     readme = os.path.join(os.getcwd(), 'README.rst')
     long_description = open(readme, 'rU').read()
